@@ -10,4 +10,6 @@ Scripts
 *.pyc
 *~
 *.db
-.DS_Storeeventex/static
+.DS_Store
+eventex/static
+
