@@ -1,3 +1,4 @@
+# coding: utf-8
     # Examples:
     # url(r'^$', 'eventex.views.home', name='home'),
     # url(r'^eventex/', include('eventex.foo.urls')),
@@ -10,9 +11,14 @@
 
 from django.conf.urls import patterns, include, url
 
-urlpatterns = patterns('eventex.core.views',
-    url(r'^$', 'homepage', name='homepage'),
-)
+# urlpatterns = patterns('eventex.core.views',      modificado na aula 2
+#    url(r'^$', 'homepage', name='homepage'),
+# )
+
+urlpatterns = patterns('',
+    url(r'^$', 'eventex.core.views.homepage', name='homepage'),
+    url(r'^inscricao/$', 'eventex.subscriptions.views.subscribe', name='subscribe'),
+    )
 
 from django.conf import settings  
 
