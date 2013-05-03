@@ -1,0 +1,60 @@
+<! Ajuste da página original feito com base no site 
+   http://www.emblema.art.br/html4blog/laranja_estrutura.html						 		>
+<! Todo o texto que está entre o sinal de menor mais esclamação e o sinal de maior "		>
+<! Evite usar palavras e sinais reservados ao html, pode acarretar erro                     >
+<! Não irá aparecer em sua página                                                           >
+<! O uso da barra invertida antes dos sinais e palavras reservadas indica fim de instrução  >
+
+<html>
+<!....................................................................Cabecalho   >
+	<head>        	
+					<! Autor da página										         		>
+		<meta name="autor"		
+					content="Antonio Miquelini" />
+					<! Descrição da página       											>
+		<meta name="description"						
+					content="Curso WelcomeToTheDjango ajustando html" />
+					<! Palavras de busca em navegadores										>
+		<meta name="keywords"							
+					content="Curso WelcomeToTheDjango, emblema html" />
+					<! Acho que é para identificação de lingua latina			      		>
+		<meta http-equiv="Content-Type" 	content="text/html; charset=utf-8" />
+					<! Indica a origem da lingua da página					         		>
+		<meta http-equiv='content-Language' content='pt-br' />
+					<! É o título da página									         		>
+		<title>EventeX</title>
+					<! Endereço onde encontro a definição do estilo da página         		>
+		<link type="text/css" href="{{ STATIC_URL }}css/style.css" 
+							  rel="stylesheet" 
+							  media="screen" />
+					<! Indica o fim do cabeçalho de informação                              >
+	</head>
+	
+<!....................................................................Corpo       >
+    <body>
+      <div id="page">
+			<div id="header">
+				<center>
+				<img src="{{ STATIC_URL }}img/logo.png" alt="EventeX" />
+				</center>
+			</div>
+      <div id="content">
+        {% block content %}
+        {% endblock content %}
+      </div>
+<!......................................................Informçãoes de rodapé     >
+			<div id="footer">
+				<p>&copy; 2012. Dreitos reservados Antonio Miquelini   
+				<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/">
+					<img 
+					alt="Creative Commons License" 
+					style="border-width:0" 
+					src="http://i.creativecommons.org/l/by-nc-sa/3.0/br/80x15.png" /></a>
+				
+				<a href="http://www.djangoproject.com/" id="django">
+				   <img src="https://www.djangoproject.com/m/img/badges/djangosite80x15.gif" 
+				   border="0" alt="A Django site." title="A Django site." /></a></p>
+			</div>
+
+    </body>                         
+</html>
