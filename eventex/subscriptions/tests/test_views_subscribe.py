@@ -4,25 +4,27 @@ This file demonstrates writing tests using the unittest module. These will pass
 when you run "manage.py test".
 
 Replace this with more appropriate tests for your application.
-"""
+Todo metodo de teste deve comecar com test_ do contrario o teste nao sera executado
+""" 
 
 from django.test import TestCase
 from eventex.subscriptions.forms import SubscriptionForm
+from eventex.subscriptions.models import Subscription
 
 class SubscribeTest(TestCase):
     def setUp(self):
         self.resp = self.client.get('/inscricao/')
         
     def test_get(self):
-        'Get /inscricao/ must return status code 200 - Deve retornar status code 200.'
+        'Get /inscricao/ must return status code 200 '
         self.assertEqual(200, self.resp.status_code)
-        print " Testou se a pagina existe  ........."
+        print ' - Get /inscricao/ must return status code 200 '
 
     def test_template(self):
-        'Response should be a rendered template. - Resposta deve ser um modelo rederizado'
+        'Response should be a rendered template.'
         self.assertTemplateUsed(self.resp,
                                'subscriptions/subscription_form.html')
-        print " Testou a renderizacao   ........."
+        print ' - Response should be a rendered template.'
         
     def test_html(self):
         'Html must contain input controls.'
@@ -30,19 +32,18 @@ class SubscribeTest(TestCase):
         self.assertContains(self.resp, '<input', 6)
         self.assertContains(self.resp, 'type="text"', 4)
         self.assertContains(self.resp, 'type="submit"')
-        print " Testou se existem campos, entradas, tipos e botoes no formulario  ........."
+        print ' - Html must contain input controls.'
         
     def teste_csrf(self):
         'Html must contain csrf token.'
         self.assertContains(self.resp, 'csrfmiddlewaretoken')
-        print " Testou o token ??????????   ........."
+        print ' - Html must contain csrf token.'
     
-# Verifica se e um formulario.
     def test_has_form(self):
-        'Context must have the subscription form - Contexto deve ter o formulario de inscricao.'
+        'Context must have the subscription form'
         form = self.resp.context['form']
         self.assertIsInstance(form, SubscriptionForm)
-        print " Testou se e um formulario ..........."
+        print ' - Context must have the subscription form'
         
 # Teste movido para test_forms.py        
 #    def test_form_has_fields(self):
@@ -50,3 +51,40 @@ class SubscribeTest(TestCase):
 #        form = self.resp.context['form']
 #        self.assertItemsEqual(['name', 'email', 'cpf', 'phone'], form.fields)
 #        print "Testou se possui 4 campos em test_views_subscribe ..........."
+
+class SubscribePostTest(TestCase):
+    def setUp(self):
+        data = dict(name='Antonio Miquelini', cpf='12345678901',
+                    email='antoniocarlos@gmail.com', phone='11-988776620')
+        self.resp = self.client.post('/inscricao/', data)
+    
+    def test_post(self):
+        'Valid POST should redirect to /inscricao/1/'
+        self.assertEqual(302, self.resp.status_code)
+        print ' - Valid POST should redirect to /inscricao/1/'
+    
+    def test_save(self):
+        'Valid POST must be saved.'
+        self.assertTrue(Subscription.objects.exists())
+        print ' - Valid POST must be saved.'
+        
+class SubscribeInvalidPostTest(TestCase):
+    def setUp(self):
+        data = dict(name='Antonio Miquelini', cpf='000000000012',
+                    email='antoniocarlos@gmail.com', phone='11-988776620')
+        self.resp = self.client.post('/inscricao/', data)
+        
+    def test_post(self):
+        'Invalid POST should not redirect.'
+        self.assertEqual(200, self.resp.status_code)
+        print ' - Invalid POST should not redirect.'
+        
+    def test_form_errors(self):
+        'Form must contain errors.'
+        self.assertTrue(self.resp.context['form'].errors)
+        print ' - Form must contain errors.'
+
+    def test_dont_save(self):
+        'Do not save data.'
+        self.assertFalse(Subscription.objects.exists())
+        print ' - Do not save data.'

@@ -10,44 +10,44 @@ class SubscriptionTest(TestCase):
         self.obj = Subscription(
         name='Antonio Miquelini',
         cpf='12345678901',
-        email='antoniomiquelini@gmail.com',
-        phone='11-86755920'
-        )
+        email='antoniocarlos@gmail.com',
+        phone='11-988776620'
+        ) 
         
     def test_create(self):
         'Subscription must have name, cpf, email, phone'
         self.obj.save()
         self.assertEqual(1, self.obj.id)
-        print ' Subscription must have name, cpf, email, phone'
+        print ' - Subscription must have name, cpf, email, phone'
         
     def test_has_created_at(self):
         'Subscription must have automatic created_at'
         self.obj.save()
         self.assertIsInstance(self.obj.created_at, datetime)
-        print ' Subscription must have automatic created_at'
+        print ' - Subscription must have automatic created_at'
         
     def test_unicode(self):
         self.assertEqual(u'Antonio Miquelini', unicode(self.obj))
-        print " Testa a instancia com mais sentido ??????? "
+        print " - Testa a instancia com unicode u "
         
 class SubscriptionUniqueTest(TestCase):
     def setUp(self):
         # Create a first entry to force the colision
         Subscription.objects.create(name='Antonio Miquelini', cpf='12345678901',
-                                    email='antoniomiquelini@gmail.com', phone='11-986755920')
+                                    email='antoniocarlos@gmail.com', phone='11-988776620')
                                     
     def test_cpf_unique(self):
         'CPF must be unique'
         s = Subscription(name='Antonio Miquelini', cpf='12345678901',
-                          email='antoniomiquelini@hotmail.com', phone='11-986755920')
+                          email='antoniocarlos@hotmail.com', phone='11-988776620')
         self.assertRaises(IntegrityError, s.save)
-        print " Testa a unicidade do CPF no modelo a ser criado em banco"
+        print " - CPF must be unique"
         
     def test_email_unique(self):
         'Email must be unique'
         s = Subscription(name='Antonio Miquelini', cpf='00000000011',
-                          email='antoniomiquelini@gmail.com', phone='11-986755920')
+                          email='antoniocarlos@gmail.com', phone='11-988776620')
         self.assertRaises(IntegrityError, s.save)
-        print " Testa a unicidade do Email no modelo a ser criado em banco"
+        print " - Email must be unique"
 
         

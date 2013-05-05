@@ -8,4 +8,4 @@ class SubscriptionFormTest(TestCase):
         'Form must have 4 fields.'
         form = SubscriptionForm()
         self.assertItemsEqual(['name', 'email', 'cpf', 'phone'], form.fields)
-        print " Testou se possui 4 campos em test_forms ..........."
+        print ' - Form must have 4 fields.'

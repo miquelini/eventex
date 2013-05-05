@@ -1,4 +1,4 @@
-# Django settings for eventex project.
+﻿# Django settings for eventex project.
 
 import os
 from unipath import Path
@@ -153,7 +153,7 @@ LOGGING = {
 			'class': 'logging.StreamHandler',
 		},	
     },
-    'loggers': {
+    'loggers': { 
         'django.request': {
             'handlers': ['mail_admins', 'console'],
             'level': 'ERROR',
