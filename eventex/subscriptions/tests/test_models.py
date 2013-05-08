@@ -30,6 +30,11 @@ class SubscriptionTest(TestCase):
         self.assertEqual(u'Antonio Miquelini', unicode(self.obj))
         print " - Testa a instancia com unicode u "
         
+    def test_paid_defoault_value_is_False(self):
+        'By default paid must be False.'
+        self.assertEqual(False, self.obj.paid)
+        print " - By default paid must be False."
+        
 class SubscriptionUniqueTest(TestCase):
     def setUp(self):
         # Create a first entry to force the colision

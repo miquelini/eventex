@@ -1,19 +1,19 @@
 # coding: utf8
 """
-This file demonstrates writing tests using the unittest module. These will pass
-when you run "manage.py test".
-
-Replace this with more appropriate tests for your application.
+Aqui usaremos o urlresolvers para identificar a rota
 Todo metodo de teste deve comecar com test_ do contrario o teste nao sera executado
 """ 
 
 from django.test import TestCase
 from eventex.subscriptions.forms import SubscriptionForm
 from eventex.subscriptions.models import Subscription
+from django.core.urlresolvers import reverse as r 
+
 
 class SubscribeTest(TestCase):
     def setUp(self):
-        self.resp = self.client.get('/inscricao/')
+#        self.resp = self.client.get('/inscricao/')
+        self.resp = self.client.get(r('subscriptions:subscribe'))
         
     def test_get(self):
         'Get /inscricao/ must return status code 200 '
@@ -56,7 +56,8 @@ class SubscribePostTest(TestCase):
     def setUp(self):
         data = dict(name='Antonio Miquelini', cpf='12345678901',
                     email='antoniocarlos@gmail.com', phone='11-988776620')
-        self.resp = self.client.post('/inscricao/', data)
+#        self.resp = self.client.post('/inscricao/', data)
+        self.resp = self.client.post(r('subscriptions:subscribe'), data)
     
     def test_post(self):
         'Valid POST should redirect to /inscricao/1/'
@@ -72,7 +73,8 @@ class SubscribeInvalidPostTest(TestCase):
     def setUp(self):
         data = dict(name='Antonio Miquelini', cpf='000000000012',
                     email='antoniocarlos@gmail.com', phone='11-988776620')
-        self.resp = self.client.post('/inscricao/', data)
+#        self.resp = self.client.post('/inscricao/', data)
+        self.resp = self.client.post(r('subscriptions:subscribe'), data)
         
     def test_post(self):
         'Invalid POST should not redirect.'

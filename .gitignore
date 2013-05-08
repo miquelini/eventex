@@ -1,5 +1,8 @@
 bin
 build
+sqlite3.exe
+Sqlite3/
+eventex/sqlite3.exe
 include
 lib
 local
