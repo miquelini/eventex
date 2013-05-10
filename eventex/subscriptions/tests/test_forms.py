@@ -9,3 +9,56 @@ class SubscriptionFormTest(TestCase):
         form = SubscriptionForm()
         self.assertItemsEqual(['name', 'email', 'cpf', 'phone'], form.fields)
         print ' - Form must have 4 fields.'
+        
+    '''
+    def test_cpf_is_digit(self):
+        'CPF must only accept digits.'
+        data = dict(name='Antonio Carlos', email='antonio@carlos.com',
+                    cpf='12345678901', phone='11-87654637')
+        data.update({'cpf': 'ABCD5678901'})
+        form = SubscriptionForm(data)
+        form.is_valid()
+        
+        self.assertItemsEqual(['cpf'], form.errors)
+        
+    def test_cpf_has_11_digits(self):
+        'CPF must have 11 digits.'
+        data = dict(name='Antonio Carlos', email='antonio@carlos.com',
+                    cpf='12345678901', phone='11-9999999999')
+        data.update({'cpf': '1234'})
+        form = SubscriptionForm(data)
+        form.is_valid()
+        
+        self.assertItemsEqual(['cpf'], form.errors)
+    '''
+    def make_validated_form(self, **kwargs):
+        data = dict(name='Antonio Carlos', email='antonio@carlos.com',
+                    cpf='12345678901', phone='11-9999999999')
+        data.update(kwargs)
+        form = SubscriptionForm(data)
+        form.is_valid()
+        return form
+
+    def test_cpf_is_digit(self):
+        'CPF must only accept digits.'
+        form = self.make_validated_form(cpf='ABCD5678901')
+        print ' Teste Teste CPF must only accept digits.'
+        
+        self.assertItemsEqual(['cpf'], form.errors)
+        
+    def test_cpf_has_11_digits(self):
+        'CPF must only accept digits.'
+        form = self.make_validated_form(cpf='1234')
+        
+        self.assertItemsEqual(['cpf'], form.errors)
+        
+    def test_email_is_optional(self):
+        'Email is optional.'
+        form = self.make_validated_form(email='')
+        self.assertFalse(form.errors)
+        
+        
+        
+        
+        
+        
