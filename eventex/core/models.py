@@ -1,3 +1,27 @@
-from django.db import models
+﻿# coding: utf-8
 
-# Create your models here.
+from django.db import models
+from django.utils.translation import ugettext_lazy as _
+
+'''
+class Speaker(object):
+        pass
+'''        
+'''
+class Speaker(object):
+        name = 'Antonio Miquelini'
+        url = 'http://antoniomiquelini.net'
+        description = 'Passionate software developer!'
+'''
+        
+class Speaker(models.Model):
+        name = models.CharField(_('Nome'), max_length=255)
+        slug = models.SlugField(_('Slug'))
+        url = models.URLField(_('Url'))
+        description = models.TextField(_(u'Descrição'), blank=True)
+        
+        def __unicode__(self):
+            return self.name
+
+        
+  
