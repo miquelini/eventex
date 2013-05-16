@@ -26,7 +26,6 @@ class Speaker(models.Model):
             
     @models.permalink
     def get_absolute_url(self):
-        print "permalink"
         return ('core:speaker_detail', (), {'slug': self.slug})
           
             
@@ -84,5 +83,11 @@ class Talk(models.Model):
 
     def get_absolute_url(self):
         return "/palestras/%d/" % self.pk
+        
+class Course(Talk):
+    slots = models.IntegerField()
+    notes = models.TextField()
+    
+    objects = PeriodManager()
         
    
