@@ -43,3 +43,21 @@ def talk_list(request):
         'afternoon_talks': Talk.objects.at_afternoon(),
         }
     return render(request, 'core/talk_list.html', context)
+'''    refatorado pagina 239 aula 4    
+def talk_detail(request, pk):
+    talk = get_object_or_404(Talk, pk=pk)
+    context = {
+        'talk': talk,
+        'slides': talk.media_set.filter(kind='SL'),
+        'videos': talk.media_set.filter(kind='YT'),
+    }
+    return render(request, 'core/talk_detail.html', context)
+'''
+def talk_detail(request, pk):
+    talk = get_object_or_404(Talk, pk=pk)
+    context = {
+        'talk': talk,
+    }
+    return render(request, 'core/talk_detail.html', context)
+    
+    

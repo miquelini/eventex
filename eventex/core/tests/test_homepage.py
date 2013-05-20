@@ -1,4 +1,4 @@
-# coding: utf-8
+ï»¿# coding: utf-8
 """
 Aqui estomos importando a classe de teste TesteCase que podem ter multiplos cenários de testes
 Criaremos uma classe para nosso teste de Homepage

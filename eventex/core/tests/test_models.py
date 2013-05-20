@@ -36,7 +36,7 @@ class ContactModelTest(TestCase):
         contact = Contact.objects.create(speaker=self.speaker, kind='P',
                                          value='11-765698655')
         self.assertEqual(1, contact.pk)
-        
+    
     def test_fax(self):
         contact = Contact.objects.create(speaker=self.speaker, kind='F',
                                          value='11-889098655')
@@ -53,6 +53,3 @@ class ContactModelTest(TestCase):
                           value='antonio@miquelini.net')
         self.assertEqual(u'antonio@miquelini.net', unicode(contact))
          
-    
-
-

@@ -1,1 +1,1 @@
-web: gunicorn eventex.wsgi
+﻿web: gunicorn eventex.wsgi
