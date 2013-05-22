@@ -133,6 +133,7 @@ INSTALLED_APPS = (
     # 'django.contrib.admindocs',
     'eventex.core',
     'eventex.subscriptions',
+    'eventex.myauth',
 )
 
 # A sample logging configuration. The only tangible logging
@@ -167,3 +168,7 @@ LOGGING = {
         },
     }
 }
+
+AUTHENTICATION_BACKENDS = ('eventex.myauth.backends.EmailBackend',
+                            'django.contrib.auth.backends.ModelBackend'
+                           )

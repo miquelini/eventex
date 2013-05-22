@@ -41,5 +41,3 @@ class SpeakerDetailNotFound(TestCase):
         url = r('core:speaker_detail', kwargs={'slug': 'john-doe'})
         response = self.client.get(url)
         self.assertEqual(404, response.status_code)
-    
-    
